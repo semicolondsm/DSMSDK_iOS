@@ -21,16 +21,16 @@ final public class DSMSDKCommon{
         _redirctURL = nil
     }
     
-    public static func initSDK(client_id : String, client_secret : String, redirctURL : String){
-        DSMSDKCommon.shared.initialize(client_id : client_id, client_secret : client_secret, redirctURL : redirctURL)
+    public static func initSDK(clientID : String, clientSecret : String, redirectURL : String){
+        DSMSDKCommon.shared.initialize(client_id : clientID, client_secret : clientSecret, redirectURL : redirectURL)
     }
     
-    private func initialize(client_id : String, client_secret : String, redirctURL : String){
+    private func initialize(client_id : String, client_secret : String, redirectURL : String){
         _client_id = client_id
         _client_secret = client_secret
-        _redirctURL = redirctURL
+        _redirctURL = redirectURL
         DSMAuth.shared.initialize(client_id: client_id,
                         client_secret: client_secret,
-                        redirctURL: redirctURL)
+                        redirctURL: redirectURL)
     }
 }
