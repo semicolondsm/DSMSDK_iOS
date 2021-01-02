@@ -16,7 +16,7 @@ Pod::Spec.new do |spec|
   #
 
   spec.name         = "DSMSDK"
-  spec.version      = "1.0.0"
+  spec.version      = "1.0.1"
   spec.summary      = "SDK for DSM_Auth"
   spec.description  = <<-DESC
     "A SDK for easy use DSM_Auth with Swift"
