@@ -32,7 +32,7 @@ Pod::Spec.new do |spec|
 
   spec.source       = { :git => "https://github.com/semicolonDSM/DSMSDK_iOS.git", :tag => "1.0.0"}
 
-  spec.source_files  = "./DSMSDK/Classes/*.swift"
+  spec.source_files  = "DSMSDK/Classes/**/*"
 
   spec.frameworks = "Foundation", "UIKit", "WebKit"
   spec.dependency "Alamofire", "~> 5.2"
