@@ -16,7 +16,7 @@ Pod::Spec.new do |spec|
   #
 
   spec.name         = "DSMSDK"
-  spec.version      = "1.0.2"
+  spec.version      = "1.0.3"
   spec.summary      = "SDK for DSM_Auth"
   spec.description  = <<-DESC
     "A SDK for easy use DSM_Auth with Swift"
@@ -30,7 +30,7 @@ Pod::Spec.new do |spec|
 
   spec.platform     = :ios, "13.0"
 
-  spec.source       = { :git => "https://github.com/semicolonDSM/DSMSDK_iOS.git", :tag => "1.0.2"}
+  spec.source       = { :git => "https://github.com/semicolonDSM/DSMSDK_iOS.git", :tag => "1.0.3"}
 
   spec.source_files  = "DSMSDK/Classes/**/*"
 
