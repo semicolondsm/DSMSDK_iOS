@@ -13,7 +13,7 @@ public let DSMAUTH = DSMAuth.shared
 public class DSMAuth {
     static public let shared = DSMAuth()
     
-    private var baseURL = "https://developer-api.dsmkr.com"
+    private var baseURL = "https://developer.ddyzd.click"
     
     private var _client_id: String = ""
     private var _client_secret: String = ""
