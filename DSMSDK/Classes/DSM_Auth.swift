@@ -1,10 +1,3 @@
-//
-//  DSM_Auth.swift
-//  DSMSDK
-//
-//  Created by 김수완 on 2020/12/23.
-//
-
 import UIKit
 import Alamofire
 
@@ -43,58 +36,55 @@ public class DSMAuth {
                 "client_secret": self._client_secret,
                 "code":code
             ]
-            
-            AF.request(self.baseURL+"/dsmauth/token", method: .post, parameters: requstBody, encoder: JSONParameterEncoder.default).validate().responseJSON{ res in
-                switch res.result
-                {
+
+            AF.request(
+                self.baseURL+"/dsmauth/token",
+                method: .post,
+                parameters: requstBody,
+                encoder: JSONParameterEncoder.default
+            ).validate().responseData { res in
+                switch res.result {
                 case .success(let value):
-                    if let processedValue = value as? [String : String] {
-                        
-                        
-                        
-                        let token = Token(Access_Token: processedValue["access_token"]!,
-                                          Refresh_Token: processedValue["refresh_token"]!)
-                        
+                    if let token = try? JSONDecoder().decode(Token.self, from: value) {
                         handler(token, nil)
                     }
                 case .failure(let error):
-                    handler(nil,error)
+                    handler(nil, error)
                 }
-                
             }
         }
         
     }
     
     public func tokenRefresh(refresh_token: String, handler: @escaping (String?, AFError?)->Void){
-        AF.request(self.baseURL+"/dsmauth/refresh", method: .get, headers: ["x-refresh-token":"Bearer "+refresh_token]).validate().responseJSON{ res in
-            switch res.result
-            {
-            case.success(let value):
-                if let processedValue = value as? [String:String]{
-                    let accessToken = processedValue["access_token"]
-                    
-                    handler(accessToken, nil)
+        AF.request(
+            self.baseURL+"/dsmauth/refresh",
+            method: .get,
+            headers: ["x-refresh-token":"Bearer "+refresh_token]
+        ).validate().responseData { res in
+            switch res.result {
+            case .success(let value):
+                if let token = try? JSONDecoder().decode(Token.self, from: value) {
+                    handler(token.Access_Token, nil)
                 }
             case .failure(let error):
-                handler(nil,error)
+                handler(nil, error)
             }
         }
     }
     
-    public func me(access_token: String, handler: @escaping (personInfo?, AFError?)->Void){
-        AF.request(self.baseURL+"/v1/info/basic", method: .get, headers: ["Authorization":"Bearer "+access_token]).validate().responseJSON{ res in
-            switch res.result
-            {
-            case.success(let value):
-                if let processedValue = value as? [String:String]{
-                    let myInfo = personInfo(name: processedValue["name"]!,
-                                            StudentID: processedValue["gcn"]!,
-                                            email: processedValue["email"]!)
-                    
-                    handler(myInfo,nil)
+    public func me(access_token: String, handler: @escaping (PersonInfo?, AFError?)->Void){
+        AF.request(
+            self.baseURL+"/v1/info/basic",
+            method: .get,
+            headers: ["Authorization":"Bearer "+access_token]
+        ).validate().responseData { res in
+            switch res.result {
+            case .success(let value):
+                if let personInfo = try? JSONDecoder().decode(PersonInfo.self, from: value) {
+                    handler(personInfo, nil)
                 }
-            case.failure(let error):
+            case .failure(let error):
                 handler(nil, error)
             }
         }
