@@ -22,7 +22,7 @@ Pod::Spec.new do |spec|
     "A SDK for easy use DSM_Auth with Swift"
                    DESC
 
-  spec.homepage     = "https://developer.dsmkr.com"
+  spec.homepage     = "https://developer.ddyzd.click"
 
   spec.license      = "Apache License"
   
